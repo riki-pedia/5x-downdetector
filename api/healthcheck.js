@@ -1,30 +1,24 @@
 export const runtime = 'edge';
 
 export async function GET() {
-  const start = Date.now();
-
-  const target = "https://riki-pedia.org/en/"; 
-  let ok = false;
-  let status = 0;
-
-  try {
-    const res = await fetch(target, { cache: "no-store" });
-    status = res.status;
-    ok = res.ok;
-  } catch (err) {
-    return Response.json({
-      ok: false,
-      error: "fetch_failed",
-      region: process.env.VERCEL_REGION,
-      time: Date.now() - start
-    });
-  }
-
-  return Response.json({
-    ok,
-    status,
-    region: process.env.VERCEL_REGION,
-    time: `${Date.now() - start} ms`,
-    last_check: new Date().toISOString()
+  // this is a function that contacts the healthcheck apis in different regions
+  const euServer = "https://eu-healthcheck.vercel.app/api/eu-healthcheck";
+  const usServer = "https://us-healthcheck.vercel.app/api/us-healthcheck";
+  const asiaServer = "https://asia-healthcheck.vercel.app/api/asia-healthcheck";
+  const usResponse = await fetch(usServer);
+  const euResponse = await fetch(euServer);
+  const asiaResponse = await fetch(asiaServer);
+  const usData = await usResponse.json();
+  const euData = await euResponse.json();
+  const asiaData = await asiaResponse.json();
+  return new Response(JSON.stringify({
+    us: usData,
+    eu: euData,
+    asia: asiaData
+  }), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
 }
