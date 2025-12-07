@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Downdetector's Downdetector's Downdetector's Downdetector's Downdetector</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-950 text-white min-h-screen flex flex-col items-center px-4">
+
+  <!-- Header Logo (optional) -->
+  <header class="w-full flex items-center gap-4 py-6">
+    <img src="logo.png" alt="Logo" class="w-40 object-contain" />
+  </header>
+
+  <!-- Title Block -->
+  <div class="w-full flex flex-col items-center mt-10 mb-8 text-center px-4">
+    <h1 class="text-4xl sm:text-5xl font-bold text-white mb-2">
+      Downdetector's Downdetector's Downdetector's Downdetector's Downdetector
+    </h1>
+    <p class="text-gray-400 max-w-xl">
+      A tiny independent status checker that checks the checker that checks the checker that checks the checker that checks Downdetector. 
+    </p>
+  </div>
+
+  <!-- Status Card -->
+  <div class="w-full max-w-4xl bg-gray-900 rounded-xl shadow-xl border border-gray-800">
+
+    <!-- Status Banner -->
+    <div id="banner" class="bg-gray-500 text-black rounded-t-xl p-6">
+      <h2 id="banner-title" class="text-xl font-bold">Waiting</h2>
+      <p id="banner-desc">Checking status...</p>
+    </div>
+
+    <div class="p-6">
+
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-gray-300 font-semibold">CHECKS BY REGION</h3>
+
+        <button id="refresh-btn"
+         class="px-3 py-1 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white transition">
+         Refresh Now
+        </button>
+        </div>
+
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="text-gray-400 border-b border-gray-800">
+            <tr>
+              <th class="py-2">Region</th>
+              <th class="py-2">Status</th>
+              <th class="py-2">HTTP</th>
+              <th class="py-2">Latency</th>
+            </tr>
+          </thead>
+
+          <tbody id="region-status-table" class="text-gray-300">
+            <!-- JS inserts rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-gray-500 text-xs mt-4">
+        Last checked: <span id="last-checked">just now</span> - <span id="region-count">3</span> regions · Target: <a class="text-blue-400 hover:underline" href="https://riki-pedia.org/en/">riki-pedia.org (testing url for right now)</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-10 text-gray-600 text-xs text-center max-w-lg">
+    This site is not affiliated with any of the previous checkers. Created by <a href="https://github.com/riki-pedia" class="text-blue-400 hover:underline">riki-pedia</a>. Hosted on <a href="https://vercel.com" class="text-blue-400 hover:underline">Vercel</a>.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
