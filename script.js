@@ -15,18 +15,20 @@ async function loadStatus() {
     row.className = "border-b border-gray-800";
 
     row.innerHTML = `
-      <td class="py-3">${info.region}</td>
+  <td class="py-3">${info.region}</td>
 
-      <td class="py-3">
-        <span class="${info.ok ? "text-green-400" : "text-red-500"}">● ${
+  <td class="py-3">
+    <span class="${info.ok ? "text-green-400" : "text-red-500"}">● ${
       info.ok ? "Up" : "Down"
     }</span>
-      </td>
+  </td>
 
-      <td class="py-3">${info.status}</td>
+  <td class="py-3">${info.status}</td>
 
-      <td class="py-3">${info.time ?? "—"}</td>
-    `;
+  <td class="py-3">${info.time ?? "—"}</td>
+
+  <td class="py-3">${info.localTime ?? info.local_time ?? "—"}</td>
+`;
 
     table.appendChild(row);
   });
