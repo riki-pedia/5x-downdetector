@@ -1,7 +1,3 @@
-// this is just to get the vercel web vitals analytics working
-// might be removed later depending on how privacy conscious i feel
-import { inject } from '@vercel/analytics';
-inject();
 async function loadStatus() {
   const res = await fetch("/api/healthcheck");
   const data = await res.json();
@@ -29,9 +25,9 @@ async function loadStatus() {
 
   <td class="py-3">${info.status}</td>
 
-  <td class="py-3">${info.time ?? "—"}</td>
+  <td class="py-3">${info.time ?? "-"}</td>
 
-  <td class="py-3">${info.localTime ?? info.local_time ?? "—"}</td>
+  <td class="py-3">${info.localTime ?? info.local_time ?? "-"}</td>
 `;
 
     table.appendChild(row);
@@ -86,5 +82,4 @@ document.getElementById("refresh-btn").addEventListener("click", () => {
 });
 
 
-// refresh every minute
 setInterval(refreshStatus, 360000);
