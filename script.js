@@ -83,4 +83,4 @@ document.getElementById("refresh-btn").addEventListener("click", () => {
 
 
 // refresh every minute
-setInterval(refreshStatus, 60000);
+setInterval(refreshStatus, 360000);
