@@ -7,8 +7,8 @@ async function loadStatus() {
   const regions = Object.values(data);
 
   let allUp = true;
-
-  regions.forEach(info => {
+  const actualRegions = regions.filter(info => info.region); // filter out non-region entries like last_updated
+  actualRegions.forEach(info => {
     if (!info.ok) allUp = false;
 
     const row = document.createElement("tr");
@@ -33,16 +33,15 @@ async function loadStatus() {
     table.appendChild(row);
   });
 
-// The data object structure: { us: {...}, eu: {...}, asia: {...} }
-const timestamps = regions.map(r => new Date(r.last_check).getTime());
-const newest = new Date(Math.max(...timestamps));
+const newest = data.last_updated
+console.log("Last Updated:", newest);
 
 document.getElementById("last-checked").textContent =
-  newest.toLocaleString();
+  new Date(newest).toLocaleString();
 
 
 // region count
-document.getElementById("region-count").textContent = regions.length;
+document.getElementById("region-count").textContent = 3
 
 
   // Update banner
@@ -61,8 +60,8 @@ document.getElementById("region-count").textContent = regions.length;
   }
 
   document.getElementById("last-checked").textContent =
-    new Date().toLocaleTimeString();
-  document.getElementById("region-count").textContent = regions.length;
+    new Date(newest).toLocaleString();
+  document.getElementById("region-count").textContent = 3;
 }
 async function refreshStatus() {
   const banner = document.getElementById("banner");

@@ -9,6 +9,13 @@ export async function GET(request) {
             return new Response('Failed to fetch healthcheck data', { status: 500 });
         }
         const data = await res.json();
+        const timestamp = new Date().toISOString();
+        data.last_updated = timestamp;
+        // the expire time in epoch milliseconds
+        const currentTime = new Date();
+        const epochMillis = currentTime.getTime();
+        const expireTimeMillis = epochMillis + 5 * 60 * 1000;
+        data.expires_at = expireTimeMillis;
         await kv.set('healthcheck-data', data);
         return new Response('KV store updated successfully', { status: 200 });
     }

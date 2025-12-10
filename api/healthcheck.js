@@ -4,7 +4,7 @@ import { kv } from '@vercel/kv';
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-export async function GET() {
+export async function GET(request) {
     try {
         const data = await kv.get('healthcheck-data');
         if (!data) {
@@ -15,6 +15,14 @@ export async function GET() {
                 return new Response('No healthcheck data available', { status: 500 });
             }
             return new Response(JSON.stringify(freshData), { status: 200 });
+        }
+        if (data.expires_at && (data.expires_at < new Date().getTime())) {
+            fetch(`${new URL(request.url).origin}/api/update-kv`);
+            sleep(750);
+            const freshData = await kv.get('healthcheck-data');
+            if (freshData) {
+                return new Response(JSON.stringify(freshData), { status: 200 });
+            }
         }
         return new Response(JSON.stringify(data), { status: 200 });
     } catch (error) {
