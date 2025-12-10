@@ -1,9 +1,3 @@
 {
-    "regions": ["iad1"],
-     "crons": [
-    {
-      "path": "/api/update-kv",
-      "schedule": "*/5 * * * *"
-    }
-  ]
+    "regions": ["iad1"]
 }
