@@ -1,0 +1,23 @@
+{
+  "name": "5x-downdetector",
+  "version": "1.0.0",
+  "description": "the checker that ch- im not typing all that check the github",
+  "homepage": "https://github.com/riki-pedia/5x-downdetector#readme",
+  "bugs": {
+    "url": "https://github.com/riki-pedia/5x-downdetector/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riki-pedia/5x-downdetector.git"
+  },
+  "license": "MIT",
+  "author": "riki-pedia",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "test": "exit"
+  },
+  "dependencies": {
+    "@vercel/kv": "^3.0.0"
+  }
+}
