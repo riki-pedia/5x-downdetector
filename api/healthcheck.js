@@ -20,8 +20,19 @@ export async function GET(request) {
             fetch(`${new URL(request.url).origin}/api/update-kv`);
             sleep(750);
             const freshData = await kv.get('healthcheck-data');
-            if (freshData) {
+            // sometimes the kv store takes a while to update
+            if (freshData !== data) {
                 return new Response(JSON.stringify(freshData), { status: 200 });
+            }
+            else {
+                sleep(750);
+                const newerData = await kv.get('healthcheck-data');
+                if (newerData !== data) {
+                    return new Response(JSON.stringify(newerData), { status: 200 });
+                }
+                else {
+                    return new Response(JSON.stringify(data), { status: 200 });
+                }
             }
         }
         return new Response(JSON.stringify(data), { status: 200 });
