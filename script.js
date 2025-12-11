@@ -81,4 +81,4 @@ document.getElementById("refresh-btn").addEventListener("click", () => {
 });
 
 
-setInterval(refreshStatus, 360000);
+setInterval(refreshStatus, 10 * 60 * 1000); // ten minutes
